@@ -11,9 +11,9 @@ import com.wordquizapp.util.DatabaseConnection;
 import com.wordquizapp.util.SqlLoader;
 
 public class WordQuizAppDAO {
-	private static final String AllWordsSql = SqlLoader.getSql("getAllWords");
-	private static final String RandomWordsSql = SqlLoader.getSql("getRandomWords");
-	private static final String GetWordByIdSql = SqlLoader.getSql("getRWordById");
+	private static final String AllWordsSql = SqlLoader.getSql("getAllWords.sql");
+	private static final String RandomWordsSql = SqlLoader.getSql("getRandomWords.sql");
+	private static final String GetWordByIdSql = SqlLoader.getSql("getRWordById.sql");
     private static final String GetWordCountSql = SqlLoader.getSql("getWordCount.sql");
 	
 	

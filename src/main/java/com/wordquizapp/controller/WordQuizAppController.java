@@ -49,36 +49,35 @@ public class WordQuizAppController extends HttpServlet {
 		if(action == null) {
 			action = "start";
 			logger.info("action is null, setting to 'start'.");
-			
-			try {
-				switch (action) {
-					case "start":
-						logger.info("Calling startQuiz method. ");
-						startQuiz(request, response);
-						break;
-					case "quiz":
-						logger.info("Calling prepareQuiz method. ");
-						prepareQuiz(request, response);
-						break;
-					case "next":
-						logger.info("Calling nextQuestion method. ");
-						nextQuestion(request, response);
-						break;
-					case "result":
-						logger.info("Calling showResult method. ");
-						showResult(request, response);
-						break;
-					default:
-						logger.warning("Unknown action: " + action + "- Executing startQuiz.");
-						startQuiz(request, response);
-						break;				
-				}
-			} catch (Exception e) {
-				logger.log(Level.SEVERE, "An error occurred during doGet processing.", e);
-				throw e;
+		}	
+		try {
+			switch (action) {
+			case "start":
+				logger.info("Calling startQuiz method. ");
+				startQuiz(request, response);
+				break;
+			case "quiz":
+				logger.info("Calling prepareQuiz method. ");
+				prepareQuiz(request, response);
+				break;
+			case "next":
+				logger.info("Calling nextQuestion method. ");
+				nextQuestion(request, response);
+				break;
+			case "result":
+				logger.info("Calling showResult method. ");
+				showResult(request, response);
+				break;
+			default:
+				logger.warning("Unknown action: " + action + "- Executing startQuiz.");
+				startQuiz(request, response);
+				break;				
 			}
-			logger.info("=== doGet Method Processing Complete ===");
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "An error occurred during doGet processing.", e);
+			throw e;
 		}
+		logger.info("=== doGet Method Processing Complete ===");
 	}	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

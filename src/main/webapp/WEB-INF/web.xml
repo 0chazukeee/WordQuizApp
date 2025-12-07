@@ -3,6 +3,19 @@
 		xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
 							https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
 		version="5.0">
+<dependencies>
+	<dependency>
+		<groupId>org.glassfish.web</groupId>
+		<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+		<version>3.0.1</version>
+	</dependency>
+
+	<dependency>
+		<groupId>jakarta.servlet.jsp.jstl</groupId>
+		<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		<version>3.0.0</version>
+	</dependency>
+</dependencies>
 
 	<!-- Welcome file configuration -->
 	<welcome-file-list>

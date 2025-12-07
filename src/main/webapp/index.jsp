@@ -15,11 +15,10 @@
         </div>
         
         <div class="start-section">
-            <a href="WordController?action=start" class="btn btn-primary">Start Quiz</a>
+            <a href="WordQuizAppController?action=start" class="btn btn-primary">Start Quiz</a>
         </div>
         
         <div class="rules">
-            <h3>Rules</h3>
             <ul>
                 <li>A Japanese word will be displayed</li>
                 <li>Enter the corresponding English word</li>

@@ -17,7 +17,7 @@ public class SqlLoader {
 		}
 		try(InputStream is = SqlLoader.class.getClassLoader().getResourceAsStream("sql/" + fileName)) {
 			if(is == null) {
-				throw new IOException ("SQL file not found: ");
+				throw new IOException ("SQL file not found: " + fileName);
 			}
 			String sql = new String(is.readAllBytes(), StandardCharsets.UTF_8).trim();
 			sqlCache.put(cacheKey, sql);
