@@ -131,7 +131,7 @@ public class WordQuizAppController extends HttpServlet {
 	private void setNewQuestion(HttpSession session, WordQuizApp wordQuizApp) {
 		session.setAttribute("currentWord", wordQuizApp);
 		session.setAttribute("showHint", false);
-		session.setAttribute("answerd", false);
+		session.setAttribute("answered", false);
 		session.setAttribute("isCorrect", false);
 		session.setAttribute("userAnswer", "");
 	}
@@ -183,7 +183,7 @@ public class WordQuizAppController extends HttpServlet {
 		//retrive each from the session
 	Integer currentQuestion = getOrDefault(session, "currentQuestion", 1);
 		WordQuizApp currentWord = (WordQuizApp) session.getAttribute("currentWord");
-		Boolean showHint = getOrDefault(session, "currentquestion", false);
+		Boolean showHint = getOrDefault(session, "showHint", false);
 		Boolean answered = getOrDefault(session, "answered", false);
 		Boolean isCorrect = getOrDefault(session, "isCorrect", false);
 		String userAnswer = (String) session.getAttribute("userAnswer");	
@@ -255,7 +255,12 @@ public class WordQuizAppController extends HttpServlet {
 			
 			 // Record the result
 			@SuppressWarnings("unchecked")
-			List<String> results = (List<String>) session.getAttribute("questionResults");
+			List<String> results = (List<String>) session.getAttribute("quizResults");
+			if (results == null) {
+				results = new ArrayList<>();
+				session.setAttribute("quizResults", results);
+			}
+
 			int currentQuestion = (Integer) session.getAttribute("currentQuestion");
 			
 			String result = String.format("question%d: %s → %s (%s)",
@@ -285,11 +290,9 @@ public class WordQuizAppController extends HttpServlet {
 		if(currentWord != null) {
 			logger.info("show hint: " + currentWord.getHint());
 		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/quiz.jsp");
-		dispatcher.forward(request, response);
 		
 		logger.info("--- showhint Method Finished ---");
+			prepareQuiz(request, response);				
 	}
 	
 	private void nextQuestion(HttpServletRequest request, HttpServletResponse response)
@@ -335,7 +338,7 @@ public class WordQuizAppController extends HttpServlet {
 				session.setAttribute("currentWord", nextWord);
 				session.setAttribute("currentQuestion", currentQuestion + 1);
 				session.setAttribute("showHint", false);
-				session.setAttribute("answerd", false);
+				session.setAttribute("answered", false);
 				session.setAttribute("isCorrect", false);
 				session.setAttribute("userAnswer", "");				
 			} else {
@@ -344,6 +347,7 @@ public class WordQuizAppController extends HttpServlet {
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "An error occurred while retrieving the word.", e);
+			throw new ServletException("Falied to load next question.", e);
 		}
 
 		prepareQuiz(request, response);		
@@ -364,7 +368,7 @@ public class WordQuizAppController extends HttpServlet {
 
 		Integer correctAnswers = (Integer) session.getAttribute("correctAnswers");
 		@SuppressWarnings("unchecked")
-		List<String> questionResults = (List<String>) session.getAttribute("questionResults");
+		List<String> questionResults = (List<String>) session.getAttribute("quizResults");
 
 		double percentage = (correctAnswers * 100.0) / 10.0;
 		
