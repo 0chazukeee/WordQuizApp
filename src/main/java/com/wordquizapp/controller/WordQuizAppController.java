@@ -259,6 +259,8 @@ public class WordQuizAppController extends HttpServlet {
 			if (results == null) {
 				results = new ArrayList<>();
 				session.setAttribute("quizResults", results);
+  	  			results = new ArrayList<>();
+    			session.setAttribute("quizResults", results);
 			}
 
 			int currentQuestion = (Integer) session.getAttribute("currentQuestion");
@@ -290,9 +292,9 @@ public class WordQuizAppController extends HttpServlet {
 		if(currentWord != null) {
 			logger.info("show hint: " + currentWord.getHint());
 		}
-		
 		logger.info("--- showhint Method Finished ---");
 			prepareQuiz(request, response);				
+		prepareQuiz(request, response);
 	}
 	
 	private void nextQuestion(HttpServletRequest request, HttpServletResponse response)
@@ -347,11 +349,10 @@ public class WordQuizAppController extends HttpServlet {
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "An error occurred while retrieving the word.", e);
-			throw new ServletException("Falied to load next question.", e);
 		}
 
 		prepareQuiz(request, response);		
-		
+
 		logger.info("--- nextQuiz Method Finished ---");
 	}
 	
@@ -394,7 +395,6 @@ public class WordQuizAppController extends HttpServlet {
 
 	@SuppressWarnings("unchecked")	
 	private <T> T getOrDefault(HttpSession session, String key, T defaultValue) {
-		// TODO Auto-generated method stub
 			T value = (T) session.getAttribute(key);
 			return value != null ? value : defaultValue;
 	}
@@ -414,9 +414,9 @@ public class WordQuizAppController extends HttpServlet {
 	private String getEncouragement(double percentage) { 
 	String encouragement = "";
 		if (percentage < 70) {
-			return "a";
+			return "Don't give up!";
 		} else {
-			return "b";
+			return "You did a great";
 		}
 	}
 }
