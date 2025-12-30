@@ -8,5 +8,5 @@ SELECT
 	, updated_date
 	, deleted_flag
 	, deleted_date
-FROM WordQuizApp;
-WHERE id NOT IN {ids} ORDER BY NEWID();
+FROM WordQuizApp
+WHERE id NOT IN ({ids}) ORDER BY NEWID();
