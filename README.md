@@ -4,5 +4,5 @@
 3. So don't expect correct things
 4. Thanks
 
-　*I developed this tool to enhance my English and coding proficiency.
+　*I developed this tool to enhance my English and coding proficiency. <br>
   *I'm still in the trial-and-error phase.
