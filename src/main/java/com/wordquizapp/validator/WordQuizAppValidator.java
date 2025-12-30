@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
  */
 public class WordQuizAppValidator {
 	// Regular expression pattern to allow only alphabetic characters
-	private static final Pattern EnglishOnlyPattern = Pattern.compile("~[a-zA-Z]+$");
-	
+	private static final Pattern EnglishOnlyPattern = Pattern.compile("^[a-zA-Z]+$");
+
     /**
      * Validates whether the entered answer is valid
      * @param answer The answer string to validate
@@ -21,7 +21,7 @@ public class WordQuizAppValidator {
 			// Check for null or empty string
 		if (answer == null || answer.trim().isEmpty()) {
 			result.setValid(false);
-			result.setErrorMessage("Please eneter an answer"); 
+			result.setErrorMessage("Please enter an answer."); 
 			return result;
 		}
 
@@ -37,7 +37,7 @@ public class WordQuizAppValidator {
 		// Length check (e.g., max 50 characters)
 		if(trimmedAnswer.length() > 50) {
 			result.setValid(false);
-			result.setErrorMessage(trimmedAnswer.toLowerCase()); //Standardise to lowercase
+			result.setErrorMessage("The answer must be 50 characters or less."); 
 			return result;
 		}
 
